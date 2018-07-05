@@ -12,12 +12,9 @@ router.get('/', function (req, res, next) {
     .then(function (data) {
       let fdata = data.filter(function (values) {
         console.log(values);
-        if (values.body.includes(searchval) == true) {
-          console.log("data aa raha hai" + values.body.includes(searchval));
-          return values;
-        }
-
-
+        if ((values.body.includes(searchval) == true )||  (values.title.includes(searchval) == true)){
+        return values;
+      }
       });
       console.log('##########################################################');
       console.log(fdata);
