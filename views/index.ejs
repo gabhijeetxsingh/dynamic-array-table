@@ -19,17 +19,51 @@
     <div class="container">
        
         <form action="/" method="GET">
-        <input type="text" id="id" name="searchstring" class="form-control" name="id" style="width: 60%;margin-top: 169px;line-height: 246%;margin-left: 19%;"/>
-        <button type="submit" class="fa fa-search" style="font-size: 337%;margin-right: -15%;margin-left: 39%;margin-top: 11px;width: 20%;" /></button>
+        <input type="text" id="id" name="searchstring" class="form-control" name="id" style="width: 60%;margin-top: -10%;line-height: 246%;margin-left: 19%;"/>
+        <button type="submit" class="fa fa-search" style="float: left;font-size: 310%;margin-right: -15%;margin-left: 80%;margin-top: -52px;width: 7%;height:53px" /></button>
     </form>
 </div>
+<br>
+<br>
+<br>
 <div class="container">
+ <table id="table" class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Sr. no</th>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>mobile</th>
+                    <th>Product</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
 
-   <%=rows%>
-</div>
-
-
-
+                <!--printing mysql data with the help of map function-->
+                <%  rows.map((i,idx)=>{ %>
+                    <tr>
+                            <td>
+                                    <%= idx+1 %>
+                                </td>
+                        <td>
+                            <%= i.userId %>
+                        </td>
+                        <td>
+                            <%= i.id %>
+                        </td>
+                        <td>
+                            <%= i.title %>
+                        </td>
+                        <td>
+                            <%= i.body %>
+                        </td>
+                      
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

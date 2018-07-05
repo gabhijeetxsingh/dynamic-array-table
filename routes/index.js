@@ -9,28 +9,27 @@ router.get('/', function (req, res, next) {
 
   searchval = req.query.searchstring;
   listdata.fetchdata(searchval)
-  .then(function (data) {
-    let fdata =  data.filter(function(values) {
-      console.log(values);
-       if(values.body.includes(searchval)==true)
-       {
-        console.log("data aa raha hai"+values.body.includes(searchval));
-        return values;
-       }
-     
-     
-    });
-    console.log('##########################################################');
-    console.log(fdata);
+    .then(function (data) {
+      let fdata = data.filter(function (values) {
+        console.log(values);
+        if (values.body.includes(searchval) == true) {
+          console.log("data aa raha hai" + values.body.includes(searchval));
+          return values;
+        }
+
+
+      });
+      console.log('##########################################################');
+      console.log(fdata);
       res.render('index', {
         title: 'Users',
-        rows: JSON.stringify(fdata)
+        rows: fdata
       });
 
-  })
-  .catch(function (e) {
-     console.log("Catch handler " + e)
-  });
+    })
+    .catch(function (e) {
+      console.log("Catch handler " + e)
+    });
 
 
 
