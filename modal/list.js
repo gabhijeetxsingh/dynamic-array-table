@@ -10,63 +10,29 @@ function fetchdata() {
         // let promises = arr.map(i=>{
         //     return reqagain(i)
         // })
-        let promises = [];
-        let finaldata = [];
-        for (var i = 1; i <= 5; i++) {
 
-            promises.push(reqagain(i))
+        let arr = []
+        while (arr.length < 100) {
+            var randomnumber = Math.floor(Math.random() * 100) + 10;
+            
+            arr[arr.length] = randomnumber;
+        }
+       
+
+
+        if (!resolve) {
+            reject("error aai baaba");
+        } else {
+            // console.log("#############-------------" + JSON.stringify(arr) + "---------------##############");
+            resolve(arr);
         }
 
-        Promise.all(promises)
-            .then(result => {
-                //  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+JSON.stringify(result)+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");  
-                //finaldata.push[result];
-                for (var i = 0; i < 5; i++) {
-
-                    finaldata.push(result);
-                }
-                console.log('-------------' + JSON.stringify(finaldata[0]) + '-----------------');
-                resolve(finaldata[1]);
-
-
-
-            }).catch(err => {
-                console.log(err);
-            })
-
-
 
 
 
     });
 }
 
-function reqagain(i) {
-
-
-    return new Promise(function (resolve, reject) {
-
-
-        request(`https://jsonplaceholder.typicode.com/posts?userId=${i}`, function (error, response, body) {
-            let arr = JSON.parse(body);
-
-
-
-            if (error) {
-                reject(error);
-            } else {
-                // console.log("#############-------------" + JSON.stringify(arr) + "---------------##############");
-                resolve(arr);
-            }
-
-        });
-
-    });
-
-
-
-
-}
 
 
 module.exports = {

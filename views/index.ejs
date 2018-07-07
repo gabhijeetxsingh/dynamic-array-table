@@ -8,68 +8,94 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>
-
+<style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+        
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+        </style>
 <body>
 
     <div class="jumbotron text-center">
-        <h1>Search</h1>
+        <h1>Table compare</h1>
     </div>
 
     <br>
-    <div class="container">
 
-        <form action="/" id="myForm" method="GET">
-            <input type="text" id="id" name="searchstring" class="form-control" name="id" style="width: 60%;margin-top: -10%;line-height: 246%;margin-left: 19%;"
-            autofocus/>
-            <button type="submit" class="fa fa-search" style="float: left;font-size: 310%;margin-right: -15%;margin-left: 80%;margin-top: -52px;width: 7%;height:53px"
-            /></button>
-        </form>
-    </div>
-    <br>
-    
-    <br>
-    <br>
-   
-    <div class="container">
-            <table id="table" class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>Sr. No</th>
-                        <th>User Id</th>
-                        <th>title</th>
-                        <th>body</th>
-    
-                    </tr>
-                </thead>
-                <tbody>
-    
-                    <!--printing mysql data with the help of map function-->
 
-                    <%  rows.map(i=>{ 
-                        i.map(j=>{
-                        %>
-                        
+    <div class="container" >
+        <table id="table" class="table table-hover table-bordered" style="width: 25px">
+            <thead>
+                <tr>
+                    <th>Comparing colors</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <!--printing mysql data with the help of map function-->
+
+                <% for(var i=0;i<=rows.length;i++){ %>
+
+                    <%if(i==0){%>
                         <tr>
                             <td>
-                                    <%= j.id %>
+                                <%=rows[i]%>
                             </td>
-                            <td>
-                                <%= j.userId %>
-                            </td>
-                          
-                            <td>
-                                <%= j.title %>
-                            </td>
-                            <td>
-                                <%= j.body %>
-                            </td>
-    
                         </tr>
-                        <%}) }) %>
-                </tbody>
-            </table>
-        </div>
-      
+                        <%}else if(rows[i]<rows[i-1]){%>
+                            <tr style="background-color:red;">
+                                <td>
+                                    <%=rows[i]%>
+                                </td>
+                            </tr>
+                            <%}else if(rows[i]>rows[i-1]){%>
+                                <tr style="background-color:green;">
+                                    <td>
+                                        <%=rows[i]%>
+                                    </td>
+                                </tr>
+                                <%}else if(rows[i]==rows[i-1]){%>
+                                    <tr style="background-color:rgb(233, 116, 136);">
+                                        <td>
+                                                <script> 
+                                                        document.addEventListener("DOMContentLoaded", function() {
+                                                           document.getElementById("table").style= "width:60%";
+                                                        }, true);
+                                                     </script>
+                                                
+                                            <%=rows[i]+"No growth"%>
+                                        </td>
+                                    </tr>
+                                <%}}%>
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+
 </body>
 
 </html>
