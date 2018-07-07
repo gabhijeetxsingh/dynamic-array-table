@@ -1,34 +1,72 @@
 var request = require('request');
+var cd = '';
+let b = [];
 
-function fetchdata(datas) {
-    console.log("datas"+datas);
-    
+function fetchdata() {
+
     return new Promise(function (resolve, reject) {
 
-        console.log("datas in promise"+datas);
-        request(`https://jsonplaceholder.typicode.com/posts?userId=3`, function (error, response, body) {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            
-            console.log(body); // Print the HTML for the Google homepage.
+        // let arr = [1,2,3,4,5]
+        // let promises = arr.map(i=>{
+        //     return reqagain(i)
+        // })
+        let promises = [];
+        let finaldata = [];
+        for (var i = 1; i <= 5; i++) {
+
+            promises.push(reqagain(i))
+        }
+
+        Promise.all(promises)
+            .then(result => {
+                //  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+JSON.stringify(result)+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");  
+                //finaldata.push[result];
+                for (var i = 0; i < 5; i++) {
+
+                    finaldata.push(result);
+                }
+                console.log('-------------' + JSON.stringify(finaldata[0]) + '-----------------');
+                resolve(finaldata[1]);
 
 
-            if (error) {    
-                //throw err;
-                console.log(error);
 
-                reject(error);
-            } else {
-                resolve(JSON.parse(body));
+            }).catch(err => {
+                console.log(err);
+            })
 
 
-                //console.log(rows);
-            }
 
-        });
+
+
     });
 }
 
+function reqagain(i) {
+
+
+    return new Promise(function (resolve, reject) {
+
+
+        request(`https://jsonplaceholder.typicode.com/posts?userId=${i}`, function (error, response, body) {
+            let arr = JSON.parse(body);
+
+
+
+            if (error) {
+                reject(error);
+            } else {
+                // console.log("#############-------------" + JSON.stringify(arr) + "---------------##############");
+                resolve(arr);
+            }
+
+        });
+
+    });
+
+
+
+
+}
 
 
 module.exports = {

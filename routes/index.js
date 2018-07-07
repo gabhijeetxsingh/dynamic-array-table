@@ -10,17 +10,11 @@ router.get('/', function (req, res, next) {
   searchval = req.query.searchstring;
   listdata.fetchdata(searchval)
     .then(function (data) {
-      let fdata = data.filter(function (values) {
-        console.log(values);
-        if ((values.body.includes(searchval) == true )||  (values.title.includes(searchval) == true)){
-        return values;
-      }
-      });
-      console.log('##########################################################');
-      console.log(fdata);
+     
+      //console.log(data);
       res.render('index', {
         title: 'Users',
-        rows: fdata
+        rows: data
       });
 
     })
